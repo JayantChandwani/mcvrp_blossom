@@ -19,5 +19,28 @@ add_executable(mcvrp
     src/graph/graph.cpp
     src/solver/solver.cpp
 )
+
+
 target_include_directories(mcvrp PRIVATE ${LEMON_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/src)
 target_link_libraries(mcvrp PRIVATE ${LEMON_LIBRARY} nlohmann_json::nlohmann_json)
+
+add_executable(scenario1 
+    src/experiments/scenario1.cpp
+    src/parser/json_parser.cpp
+    src/graph/graph.cpp
+    src/solver/solver.cpp
+    src/experiments/test_runner.cpp
+)
+target_include_directories(scenario1 PRIVATE ${LEMON_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/src)
+target_link_libraries(scenario1 PRIVATE ${LEMON_LIBRARY} nlohmann_json::nlohmann_json)
+
+add_executable(scenario3
+    src/experiments/scenario3.cpp
+    src/parser/json_parser.cpp
+    src/graph/graph.cpp
+    src/solver/solver.cpp
+    src/utils/edge_filters.cpp
+    src/experiments/test_runner.cpp
+)
+target_include_directories(scenario3 PRIVATE ${LEMON_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/src)
+target_link_libraries(scenario3 PRIVATE ${LEMON_LIBRARY} nlohmann_json::nlohmann_json)

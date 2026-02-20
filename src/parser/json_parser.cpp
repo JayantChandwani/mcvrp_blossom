@@ -2,7 +2,7 @@
 #include <fstream>
 #include <nlohmann/json.hpp>
 
-using mcvrp::types::GraphInput;  // At the top
+using mcvrp::types::GraphInput;
 
 namespace mcvrp::parser {
 
@@ -12,7 +12,13 @@ GraphInput parse_graph_json(const std::string &filepath) {
   file >> j;
 
   GraphInput input;
-  input.nodes = j["nodes"].get<std::vector<int>>();
+
+  for (const auto& node_json : j["nodes"]) {
+    types::Node node;
+    node.id = node_json["id"];
+    node.demand = node_json["demand"];
+    input.nodes.push_back(node);
+  }
 
   for (const auto &edge : j["edges"])
     input.edges.emplace_back(edge["u"].get<int>(), edge["v"].get<int>(),

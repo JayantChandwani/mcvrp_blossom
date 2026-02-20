@@ -31,8 +31,6 @@ MatchingResult Solver::get_minimal_weighted_matching(Graph& G) {
     lemon::MaxWeightedMatching<lemon::SmartGraph> mwm(graph, shifted_weights);
     mwm.run();
     
-    std::cout << "DEBUG: Matching size: " << mwm.matchingSize() << "\n";
-    
     result.total_weight = 0;
     for (lemon::SmartGraph::EdgeIt e(graph); e != lemon::INVALID; ++e) {
         if (mwm.matching(e)) {  

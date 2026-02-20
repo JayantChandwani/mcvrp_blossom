@@ -1,14 +1,14 @@
 #include "graph/graph.h"
 #include <map>
 
-using mcvrp::types::GraphInput;  // At the top
+using mcvrp::types::GraphInput;
 
 namespace mcvrp::graph {
 
 void Graph::build_graph(const GraphInput& graph_input) {
     std::map<int, lemon::SmartGraph::Node> node_map;
     for (const auto& node : graph_input.nodes) {
-        node_map[node] = G.addNode();
+        node_map[node.id] = G.addNode();
     }
 
     for (const auto& [u, v, w] : graph_input.edges) {
